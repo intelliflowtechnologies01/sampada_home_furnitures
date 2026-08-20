@@ -573,6 +573,9 @@ p { color: rgba(34, 26, 18, 0.72); }
 .info-item strong { display: block; font-size: 0.95rem; color: var(--ivory); margin-bottom: 0.15rem; }
 .info-item span { font-size: 0.8rem; color: rgba(246, 241, 231, 0.6); line-height: 1.45; display: block; }
 
+/* 3-column variant (contact page) — responsive override of the 4-col default */
+.info-bar-3 { grid-template-columns: repeat(3, 1fr); }
+
 /* ---------- Shop by categories : magazine collage ---------- */
 .categories-section { padding: var(--section-pad) 0 0; }
 
@@ -1164,13 +1167,14 @@ p { color: rgba(34, 26, 18, 0.72); }
 .footer-links a:hover { color: var(--brass-soft); padding-left: 6px; }
 .footer-contact li {
   display: flex;
+  align-items: flex-start;
   gap: 0.75rem;
   color: rgba(246, 241, 231, 0.65);
   font-size: 0.9rem;
   margin-bottom: 0.85rem;
   list-style: none;
 }
-.footer-contact svg { color: var(--brass); flex-shrink: 0; margin-top: 3px; }
+.footer-contact svg { color: var(--brass); flex-shrink: 0; margin-top: 4px; }
 .footer-contact { padding: 0; margin: 0; }
 .social-row { display: flex; gap: 0.6rem; margin-top: 1.4rem; }
 .social-row a {
@@ -1622,7 +1626,10 @@ p { color: rgba(34, 26, 18, 0.72); }
   border-bottom: 1px solid var(--line);
   margin-bottom: 1.4rem;
   overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
+.pdp-tab-head::-webkit-scrollbar { display: none; }
 .pdp-tab-btn {
   border: none;
   background: transparent;
@@ -1741,17 +1748,67 @@ p { color: rgba(34, 26, 18, 0.72); }
 [x-cloak] { display: none !important; }
 
 /* ---------- Responsive ---------- */
+
+/* Tablet (≤ 991px) — nav links hide, hero stacks, grids collapse */
 @media (max-width: 991.98px) {
   .nav-links, .nav-cta { display: none; }
   .hero-grid { grid-template-columns: 1fr; }
-  .hero-visual { max-width: 560px; }
+  .hero-visual { max-width: 560px; margin-inline: auto; }
   .hero-float-card { left: 0.8rem; }
-  .info-bar { grid-template-columns: repeat(2, 1fr); }
+  .hero-badge-rotator { right: 0; top: -1rem; }
+  .info-bar, .info-bar-3 { grid-template-columns: repeat(2, 1fr); }
+  /* Category collage: fill the empty slot left by the spanning sofa piece */
+  .cp-lighting { grid-column: span 2; aspect-ratio: 16 / 10; }
+  /* Reviews: shrink the giant decorative quote mark */
+  .reviews-section::before { font-size: 16rem; right: 1rem; }
 }
+
+/* Mobile (≤ 575px) — single column, compact nav, stacked actions */
 @media (max-width: 575.98px) {
-  .info-bar { grid-template-columns: 1fr; }
+  /* --- Nav island: prevent overflow on 320-375px viewports --- */
+  .nav-island { padding: 0.45rem 0.45rem 0.45rem 0.9rem; gap: 0.5rem; }
+  .nav-island-wrap { padding: 0 0.5rem; }
+  .nav-actions { gap: 0.1rem; }
+  .nav-actions .dropdown { display: none; }        /* hide profile chip on smallest screens */
+  .icon-btn { width: 38px; height: 38px; }
+  .brand-mark { gap: 0.5rem; }
+  .brand-mark .brand-emblem { width: 34px; height: 34px; font-size: 1rem; }
+  .brand-mark .brand-name { font-size: 1.1rem; }
+  .brand-mark .brand-name small { display: none; }  /* hide "Furniture" subtitle */
+
+  /* --- Info bars: single column --- */
+  .info-bar, .info-bar-3 { grid-template-columns: 1fr; }
+
+  /* --- Hero --- */
   .hero-proof { gap: 1.4rem; flex-wrap: wrap; }
   .hero-badge-rotator { display: none; }
+  .hero-float-card { left: 0.5rem; right: 0.5rem; max-width: none; }
+
+  /* --- Product cards: prevent meta overflow in 2-col grid --- */
+  .product-info { padding: 0.85rem 0.9rem 1rem; }
+  .product-name { font-size: 0.98rem; }
+  .product-price { font-size: 0.88rem; }
+  .product-price .was { font-size: 0.72rem; margin-right: 0.3rem; }
+  .product-rating { font-size: 0.72rem; gap: 0.2rem; }
+  .product-rating svg { width: 11px; height: 11px; }
+  .product-meta { flex-wrap: wrap; gap: 0.25rem; }
+  .product-quickadd button { font-size: 0.66rem; padding: 0.6rem; }
+
+  /* --- PDP actions: stack qty + wishlist on row 1, cart button full-width below --- */
+  .pdp-actions { flex-wrap: wrap; }
+  .pdp-qty { order: 1; }
+  .pdp-wish-btn { order: 2; }
+  .pdp-add-btn { order: 3; flex: 1 1 100%; min-width: 0; }
+
+  /* --- Filter bar: search pill takes full width on its own row --- */
+  .filter-bar .search-pill { flex: 1 1 100%; }
+  .filter-bar .search-pill input { min-width: 0; }
+  .filter-bar > .d-flex { width: 100%; }
+
+  /* --- Newsletter form: stack vertically --- */
   .newsletter-form { flex-direction: column; border-radius: var(--radius-md); padding: 0.8rem; }
   .newsletter-form .btn-luxe { width: 100%; }
+
+  /* --- Reviews quote mark: further reduce --- */
+  .reviews-section::before { font-size: 10rem; right: 0.5rem; top: -2rem; }
 }
