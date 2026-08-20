@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop All Furniture — Sampada Furniture</title>
+  <meta name="description" content="Browse the full Sampada collection — handcrafted sofas, beds, dining sets, tables, storage and lighting in solid wood." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23221A12'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23D9C39A' font-family='Georgia' font-style='italic'%3ES%3C/text%3E%3C/svg%3E" />
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js" defer></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.10/dist/cdn.min.js"></script>
+</head>
+<body x-data x-cloak>
+
+  <!-- ============ ANNOUNCEMENT BAR ============ -->
+  <div class="announce-bar">
+    Festive Craft Sale — Up to 25% off signature pieces
+    <span class="sep d-none d-md-inline">✦</span>
+    <span class="d-none d-md-inline">Free white-glove delivery across India</span>
+  </div>
+
+  <!-- ============ ISLAND PILL NAVBAR ============ -->
+  <div class="nav-island-wrap">
+    <nav class="nav-island" aria-label="Main navigation">
+      <a href="index.html" class="brand-mark">
+        <span class="brand-emblem">S</span>
+        <span class="brand-name">Sampada<small>Furniture</small></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">Products</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="blog.html">Journal</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="icon-btn" aria-label="Search" @click="$store.shop.showToast('Search is coming soon in this prototype')">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="Wishlist" @click="$store.shop.wishlistOpen = true">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.3 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3.4 1-4.5 2.5C10.9 4 9.3 3 7.5 3A5.5 5.5 0 0 0 2 8.5c0 2.2 1.5 4 3 5.5l7 7Z"/></svg>
+          <span class="badge-dot" x-show="$store.shop.wishlist.length" x-text="$store.shop.wishlist.length"></span>
+        </button>
+        <button class="icon-btn" aria-label="Cart" @click="$store.shop.cartOpen = true">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1.5 13.5a1 1 0 0 1-1 1.1H5.5a1 1 0 0 1-1-1.1Z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>
+          <span class="badge-dot" x-show="$store.shop.cartCount" x-text="$store.shop.cartCount"></span>
+        </button>
+
+        <div class="dropdown">
+          <button class="profile-chip" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Account menu">
+            <span class="avatar">G</span>
+            <svg class="d-none d-sm-block" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-luxe">
+            <li class="dropdown-head"><strong>Hello, Guest</strong><span>guest@sampada.in</span></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6.5 8-6.5s8 2.5 8 6.5"/></svg>My Profile</a></li>
+            <li><a class="dropdown-item" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg>My Orders</a></li>
+            <li><a class="dropdown-item" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.3 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3.4 1-4.5 2.5C10.9 4 9.3 3 7.5 3A5.5 5.5 0 0 0 2 8.5c0 2.2 1.5 4 3 5.5l7 7Z"/></svg>Wishlist</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>Sign In</a></li>
+          </ul>
+        </div>
+
+        <a href="products.html" class="btn-luxe btn-ink nav-cta">Shop Now</a>
+
+        <button class="icon-btn d-lg-none" aria-label="Open menu" @click="$store.shop.mobileMenu = true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h12"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu-panel" x-show="$store.shop.mobileMenu" x-transition.opacity>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <span class="brand-name" style="font-family:var(--font-display);font-size:1.4rem;">Sampada</span>
+      <button class="icon-btn" style="color:var(--ivory)" aria-label="Close menu" @click="$store.shop.mobileMenu = false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <a class="mnav-link" href="index.html">Home <span class="idx">01</span></a>
+    <a class="mnav-link" href="products.html">Products <span class="idx">02</span></a>
+    <a class="mnav-link" href="about.html">About Us <span class="idx">03</span></a>
+    <a class="mnav-link" href="blog.html">Journal <span class="idx">04</span></a>
+    <a class="mnav-link" href="contact.html">Contact <span class="idx">05</span></a>
+    <div class="mt-auto pt-4">
+      <a href="products.html" class="btn-luxe btn-brass w-100">Shop the Collection</a>
+    </div>
+  </div>
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb-luxe reveal" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="crumb-sep">✦</span>
+        <span>Products</span>
+      </nav>
+      <span class="eyebrow reveal reveal-d1">The Collection</span>
+      <h1 class="display-hero reveal reveal-d2">Furniture for<br />every <em>room</em></h1>
+      <p class="lead reveal reveal-d3" style="max-width:520px;color:rgba(34,26,18,.72);">
+        Solid teak, walnut and oak — cut, joined and finished by hand in our Pune
+        workshop. Filter by room, search by name, find your forever piece.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ CATALOG ============ -->
+  <section class="pb-5" x-data="{
+      cat: 'all',
+      q: '',
+      sort: 'featured',
+      init() {
+        const c = new URLSearchParams(location.search).get('cat');
+        if (c && SF_DATA.categories.some(x => x.slug === c)) this.cat = c;
+      },
+      get items() {
+        let list = SF_DATA.products.filter(p =>
+          (this.cat === 'all' || p.cat === this.cat) &&
+          (!this.q || p.name.toLowerCase().includes(this.q.toLowerCase()))
+        );
+        if (this.sort === 'price-asc')  list = [...list].sort((a, b) => a.price - b.price);
+        if (this.sort === 'price-desc') list = [...list].sort((a, b) => b.price - a.price);
+        if (this.sort === 'rating')     list = [...list].sort((a, b) => b.rating - a.rating);
+        return list;
+      }
+    }">
+    <div class="container">
+      <div class="filter-bar mb-2 reveal">
+        <button class="filter-chip" :class="cat === 'all' ? 'active' : ''" @click="cat = 'all'">All</button>
+        <template x-for="c in SF_DATA.categories" :key="c.slug">
+          <button class="filter-chip" :class="cat === c.slug ? 'active' : ''" @click="cat = c.slug" x-text="c.name"></button>
+        </template>
+        <div class="d-flex flex-wrap gap-2 align-items-center ms-lg-auto">
+          <div class="search-pill">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input type="search" placeholder="Search pieces…" x-model.debounce.250ms="q" aria-label="Search products" />
+          </div>
+          <select class="filter-select" x-model="sort" aria-label="Sort products">
+            <option value="featured">Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="mb-4" style="font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:rgba(34,26,18,.5);">
+        Showing <span x-text="items.length" style="color:var(--brass-deep)"></span> pieces
+      </p>
+
+      <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-3 g-lg-4">
+        <template x-for="p in items" :key="p.id">
+          <div class="col">
+            <article class="product-card">
+              <div class="product-media">
+                <span class="product-tag" x-show="p.tag || p.isNew"
+                      :class="p.tag === 'sale' ? 'tag-sale' : (p.tag ? '' : 'tag-new')"
+                      x-text="p.tag === 'sale' ? 'Sale' : (p.tag === 'bestseller' ? 'Bestseller' : 'New')"></span>
+                <button class="wish-btn" :class="$store.shop.inWishlist(p.id) ? 'active' : ''" :aria-label="'Wishlist ' + p.name" @click="$store.shop.toggleWishlist(p.id)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" :fill="$store.shop.inWishlist(p.id) ? 'currentColor' : 'none'" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.3 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3.4 1-4.5 2.5C10.9 4 9.3 3 7.5 3A5.5 5.5 0 0 0 2 8.5c0 2.2 1.5 4 3 5.5l7 7Z"/></svg>
+                </button>
+                <a :href="'product.html?id=' + p.id"><img :src="p.img" :alt="p.name" loading="lazy" /></a>
+                <div class="product-quickadd">
+                  <button @click="$store.shop.addToCart(p.id)">Add to Cart</button>
+                </div>
+              </div>
+              <div class="product-info">
+                <div class="product-cat" x-text="SF.catName(p.cat)"></div>
+                <h3 class="product-name"><a :href="'product.html?id=' + p.id" x-text="p.name"></a></h3>
+                <div class="product-meta">
+                  <div class="product-price">
+                    <span class="was" x-show="p.was" x-text="p.was ? SF.money(p.was) : ''"></span>
+                    <span x-text="SF.money(p.price)"></span>
+                  </div>
+                  <div class="product-rating">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <span x-text="p.rating"></span>
+                    <span style="color:rgba(34,26,18,.45);font-weight:500" x-text="'(' + p.reviews + ')'"></span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </template>
+      </div>
+
+      <div class="text-center py-5" x-show="!items.length" x-cloak>
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="var(--brass-soft)" stroke-width="1.4" stroke-linecap="round" class="mb-3"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M8 11h6"/></svg>
+        <h3 style="font-size:1.5rem;">Nothing matches that search</h3>
+        <p>Try a different name, or clear the filters to browse the full collection.</p>
+        <button class="btn-luxe btn-outline-ink" @click="cat = 'all'; q = ''">Clear Filters</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CUSTOM ORDER CTA ============ -->
+  <section class="container reveal" style="padding-top: 2rem;">
+    <div class="cta-band">
+      <div class="cta-bg">
+        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1800&auto=format&fit=crop" alt="Custom-crafted Sampada interior" loading="lazy" />
+      </div>
+      <div class="cta-inner">
+        <h2>Can't find your piece?<br />We <em>build to order.</em></h2>
+        <p>Odd corner, unusual dimension, a design you sketched on a napkin — our workshop takes on bespoke commissions every month.</p>
+        <a href="contact.html" class="btn-luxe btn-brass">
+          Request a Custom Build
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-newsletter">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-6">
+            <span class="eyebrow" style="color:var(--brass-soft)">The Grain — Our Letter</span>
+            <h2>Design notes, in your<br /><em>inbox monthly</em></h2>
+          </div>
+          <div class="col-lg-6">
+            <form class="newsletter-form" data-demo-form="Welcome to The Grain — check your inbox!" aria-label="Newsletter signup">
+              <input type="email" placeholder="Your email address" required aria-label="Email address" />
+              <button type="submit" class="btn-luxe btn-brass">Subscribe</button>
+            </form>
+            <p class="mt-2 mb-0" style="font-size:.76rem;color:rgba(246,241,231,.45);">One thoughtful letter a month. No noise, ever.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-lg-4 footer-brand">
+            <a href="index.html" class="brand-mark mb-3">
+              <span class="brand-emblem" style="background:var(--brass);color:var(--ink)">S</span>
+              <span class="brand-name" style="color:var(--ivory)">Sampada<small>Furniture</small></span>
+            </a>
+            <p>
+              Three generations of master joiners crafting heirloom furniture
+              from responsibly sourced solid wood. Made in India, made for life.
+            </p>
+            <div class="social-row">
+              <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+              <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+              <a href="#" aria-label="Pinterest"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9 21c1-3 1.5-5.5 2-8"/><path d="M11 13a3.5 3.5 0 1 1 4.5-3.4c.5 2.5-1 4.7-3.2 4.7-1 0-1.8-.5-2.1-1.3"/></svg></a>
+              <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg></a>
+            </div>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h4 class="footer-heading">Shop</h4>
+            <ul class="footer-links">
+              <li><a href="products.html?cat=sofas">Sofas &amp; Seating</a></li>
+              <li><a href="products.html?cat=beds">Beds &amp; Bedroom</a></li>
+              <li><a href="products.html?cat=dining">Dining</a></li>
+              <li><a href="products.html?cat=tables">Tables &amp; Desks</a></li>
+              <li><a href="products.html?cat=storage">Storage</a></li>
+              <li><a href="products.html?cat=lighting">Lighting</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h4 class="footer-heading">Company</h4>
+            <ul class="footer-links">
+              <li><a href="about.html">Our Story</a></li>
+              <li><a href="about.html">Craftsmanship</a></li>
+              <li><a href="blog.html">Journal</a></li>
+              <li><a href="contact.html">Showrooms</a></li>
+              <li><a href="contact.html">Trade Program</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h4 class="footer-heading">Support</h4>
+            <ul class="footer-links">
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="#">Delivery &amp; Assembly</a></li>
+              <li><a href="#">Warranty</a></li>
+              <li><a href="#">Returns</a></li>
+              <li><a href="#">Care Guide</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h4 class="footer-heading">Visit Us</h4>
+            <ul class="footer-contact">
+              <li>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>42 Orchard Avenue,<br />Koregaon Park, Pune 411001</span>
+              </li>
+              <li>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span>+91 98220 45678</span>
+              </li>
+              <li>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+                <span>hello@sampadafurniture.in</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-word" aria-hidden="true">SAMPADA</div>
+
+    <div class="footer-bottom">
+      <div class="container d-flex flex-wrap justify-content-between gap-2">
+        <span>© 2026 Sampada Furniture. Crafted with care in Pune, India.</span>
+        <span><a href="#" class="me-3">Privacy</a><a href="#" class="me-3">Terms</a><a href="#">Sitemap</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ CART DRAWER ============ -->
+  <template x-teleport="body">
+    <div>
+      <div class="drawer-backdrop" x-show="$store.shop.cartOpen" x-transition.opacity @click="$store.shop.cartOpen = false"></div>
+      <aside class="cart-drawer" :class="{ open: $store.shop.cartOpen }" aria-label="Shopping cart">
+        <div class="drawer-head">
+          <h3>Your Cart <span style="font-size:.9rem;color:var(--brass-deep)" x-text="'(' + $store.shop.cartCount + ')'"></span></h3>
+          <button class="icon-btn" aria-label="Close cart" @click="$store.shop.cartOpen = false">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <div class="drawer-body">
+          <template x-for="line in $store.shop.cartItems" :key="line.id">
+            <div class="cart-line">
+              <img :src="line.product.img" :alt="line.product.name" />
+              <div class="cl-info">
+                <span class="cl-cat" x-text="SF.catName(line.product.cat)"></span>
+                <strong x-text="line.product.name"></strong>
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                  <div class="qty-stepper">
+                    <button @click="$store.shop.setQty(line.id, line.qty - 1)" aria-label="Decrease quantity">−</button>
+                    <span x-text="line.qty"></span>
+                    <button @click="$store.shop.setQty(line.id, line.qty + 1)" aria-label="Increase quantity">+</button>
+                  </div>
+                  <strong style="font-size:.92rem" x-text="SF.money(line.product.price * line.qty)"></strong>
+                </div>
+              </div>
+              <button class="cl-remove" aria-label="Remove item" @click="$store.shop.removeFromCart(line.id)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              </button>
+            </div>
+          </template>
+          <div class="drawer-empty" x-show="!$store.shop.cartItems.length">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1.5 13.5a1 1 0 0 1-1 1.1H5.5a1 1 0 0 1-1-1.1Z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>
+            <p class="mb-3">Your cart is waiting for its first treasure.</p>
+            <a href="products.html" class="btn-luxe btn-ink" @click="$store.shop.cartOpen = false">Start Shopping</a>
+          </div>
+        </div>
+        <div class="drawer-foot" x-show="$store.shop.cartItems.length">
+          <div class="d-flex justify-content-between mb-1" style="font-size:.9rem;">
+            <span style="color:rgba(34,26,18,.6)">Subtotal</span>
+            <strong x-text="SF.money($store.shop.cartTotal)"></strong>
+          </div>
+          <p style="font-size:.75rem;color:rgba(34,26,18,.5)" class="mb-3">White-glove delivery &amp; assembly included. Taxes calculated at checkout.</p>
+          <button class="btn-luxe btn-brass w-100" @click="$store.shop.showToast('Checkout is stubbed in this prototype')">
+            Proceed to Checkout
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </button>
+        </div>
+      </aside>
+    </div>
+  </template>
+
+  <!-- ============ WISHLIST DRAWER ============ -->
+  <template x-teleport="body">
+    <div>
+      <div class="drawer-backdrop" x-show="$store.shop.wishlistOpen" x-transition.opacity @click="$store.shop.wishlistOpen = false"></div>
+      <aside class="cart-drawer" :class="{ open: $store.shop.wishlistOpen }" aria-label="Wishlist">
+        <div class="drawer-head">
+          <h3>Wishlist <span style="font-size:.9rem;color:var(--brass-deep)" x-text="'(' + $store.shop.wishlist.length + ')'"></span></h3>
+          <button class="icon-btn" aria-label="Close wishlist" @click="$store.shop.wishlistOpen = false">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <div class="drawer-body">
+          <template x-for="p in $store.shop.wishlistItems" :key="p.id">
+            <div class="cart-line">
+              <img :src="p.img" :alt="p.name" />
+              <div class="cl-info">
+                <span class="cl-cat" x-text="SF.catName(p.cat)"></span>
+                <strong x-text="p.name"></strong>
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                  <strong style="font-size:.92rem" x-text="SF.money(p.price)"></strong>
+                  <button class="btn-luxe btn-ink" style="padding:.45rem 1rem;font-size:.68rem" @click="$store.shop.addToCart(p.id)">Add to Cart</button>
+                </div>
+              </div>
+              <button class="cl-remove" aria-label="Remove from wishlist" @click="$store.shop.toggleWishlist(p.id)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              </button>
+            </div>
+          </template>
+          <div class="drawer-empty" x-show="!$store.shop.wishlistItems.length">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.3 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3.4 1-4.5 2.5C10.9 4 9.3 3 7.5 3A5.5 5.5 0 0 0 2 8.5c0 2.2 1.5 4 3 5.5l7 7Z"/></svg>
+            <p>Nothing saved yet — tap the heart on any piece you love.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </template>
+
+  <!-- ============ TOAST ============ -->
+  <template x-teleport="body">
+    <div class="luxe-toast" x-show="$store.shop.toast" x-transition.opacity>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      <span x-text="$store.shop.toast"></span>
+    </div>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

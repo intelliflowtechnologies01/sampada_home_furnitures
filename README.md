@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sampada Furniture — Static Website
 
-## Getting Started
+Handcrafted luxury furniture storefront. A static, dependency-free site built
+with semantic HTML, a custom CSS design system, and Alpine.js for lightweight
+interactivity (cart, wishlist, tabs, mobile menu).
 
-First, run the development server:
+## Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+.
+├── index.html        # Home
+├── products.html     # Product listing (filter by category via ?cat=)
+├── product.html      # Product detail (load by ?id=)
+├── about.html        # About / story
+├── blog.html         # Journal
+├── contact.html      # Contact + showrooms
+├── assets/
+│   ├── css/style.css # Design system + all component styles
+│   └── js/
+│       ├── data.js   # Catalog (categories, products, reviews, reels, posts)
+│       └── app.js    # Cart/wishlist store, helpers, scroll reveal
+└── .github/workflows/deploy.yml  # GitHub Pages deploy
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Run locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+No build step required — serve the folder with any static server:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npx http-server . -p 8095
+# then open http://127.0.0.1:8095
+```
 
-## Learn More
+## Deploy
 
-To learn more about Next.js, take a look at the following resources:
+Push to `main` (or `master`). The GitHub Actions workflow stages the HTML +
+`assets/` into `./out/`, adds `.nojekyll`, and deploys to GitHub Pages.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Editing content
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Products / categories / reviews / reels / posts:** `assets/js/data.js`
+- **Styles / design tokens:** `assets/css/style.css` (see `:root` variables at top)
+- **Page markup:** the corresponding `*.html` file in the root

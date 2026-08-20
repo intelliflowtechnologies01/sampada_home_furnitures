@@ -1,9 +1,18 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# Sampada Furniture — Static Website
 
-# This is NOT the Next.js you know
+This is a static HTML/CSS/JS site (no framework, no build step).
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+## Conventions
 
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->
+- Pages are standalone `*.html` files in the repo root, linked with relative paths.
+- All styles live in `assets/css/style.css` — design tokens are CSS custom
+  properties in `:root`. Reuse existing classes; add new tokens there when needed.
+- Catalog data (products, categories, reviews, reels, posts) lives in
+  `assets/js/data.js` as the global `SF_DATA` object. Edit data there, not in markup.
+- Interactivity (cart, wishlist, tabs, mobile menu, scroll reveal) is handled by
+  Alpine.js + `assets/js/app.js`. Use Alpine directives (`x-data`, `x-show`,
+  `@click`) consistent with the existing pages.
+- No package manager, no Node runtime required to run or build. Serve the folder
+  with any static file server for local dev.
+- Deploy is via `.github/workflows/deploy.yml` → GitHub Pages (static files
+  staged into `./out/` with a `.nojekyll` marker).
