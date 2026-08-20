@@ -210,11 +210,14 @@ p { color: rgba(34, 26, 18, 0.72); }
   position: sticky;
   top: 0.9rem;
   z-index: 1040;
-  padding: 0 1rem;
+  padding: 0 0.75rem; /* match Bootstrap .container side padding */
   margin-top: 0.9rem;
 }
 .nav-island {
-  max-width: 1180px;
+  /* Track Bootstrap .container content width at every breakpoint so the
+     island edges align exactly with the page content below it.
+     (container max-width minus its 2×0.75rem padding) */
+  max-width: none; /* fluid below sm — matches fluid .container */
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -228,6 +231,16 @@ p { color: rgba(34, 26, 18, 0.72); }
   border: 1px solid rgba(34, 26, 18, 0.09);
   box-shadow: 0 10px 40px rgba(34, 26, 18, 0.10);
   transition: box-shadow 0.4s var(--ease-luxe), background 0.4s var(--ease-luxe);
+}
+@media (min-width: 576px)  { .nav-island { max-width: 516px; } }  /* 540 − 24 */
+@media (min-width: 768px)  { .nav-island { max-width: 696px; } }  /* 720 − 24 */
+@media (min-width: 992px)  { .nav-island { max-width: 936px; } }  /* 960 − 24 */
+@media (min-width: 1200px) { .nav-island { max-width: 1116px; } } /* 1140 − 24 */
+@media (min-width: 1400px) { .nav-island { max-width: 1296px; } } /* 1320 − 24 */
+/* Tighten links slightly at lg so brand + links + actions fit the 936px island */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .nav-links a { padding: 0.55rem 0.7rem; font-size: 0.78rem; }
+  .nav-cta { padding: 0.6rem 1.1rem; margin-left: 0.25rem; }
 }
 .nav-island.scrolled {
   background: rgba(251, 248, 241, 0.95);
@@ -1783,7 +1796,6 @@ p { color: rgba(34, 26, 18, 0.72); }
 @media (max-width: 575.98px) {
   /* --- Nav island: prevent overflow on 320-375px viewports --- */
   .nav-island { padding: 0.45rem 0.45rem 0.45rem 0.9rem; gap: 0.5rem; }
-  .nav-island-wrap { padding: 0 0.5rem; }
   .nav-actions { gap: 0.1rem; }
   .nav-actions .dropdown { display: none; }        /* hide profile chip on smallest screens */
   .icon-btn { width: 38px; height: 38px; }
