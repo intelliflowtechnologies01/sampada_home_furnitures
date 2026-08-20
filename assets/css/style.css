@@ -1375,11 +1375,20 @@ p { color: rgba(34, 26, 18, 0.72); }
   align-items: center;
   box-shadow: var(--shadow-sm);
 }
+/* Chips, search pill and sort select share one exact height so the
+   whole bar reads as a single aligned row. */
+.filter-chip,
+.filter-select,
+.search-pill {
+  height: 2.6rem;
+}
 .filter-chip {
+  display: inline-flex;
+  align-items: center;
   border: none;
   background: transparent;
   border-radius: var(--radius-pill);
-  padding: 0.6rem 1.2rem;
+  padding: 0 1.2rem;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1391,16 +1400,25 @@ p { color: rgba(34, 26, 18, 0.72); }
 .filter-chip:hover { color: var(--ink); background: var(--sand); }
 .filter-chip.active { background: var(--ink); color: var(--ivory); }
 .filter-select {
+  appearance: none;
+  -webkit-appearance: none;
   border: 1px solid var(--line);
   border-radius: var(--radius-pill);
-  background: var(--paper);
-  padding: 0.6rem 1.1rem;
+  background-color: var(--paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2396733F' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.95rem center;
+  background-size: 12px;
+  padding: 0 2.4rem 0 1.1rem;
+  font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 600;
+  line-height: 1;
   color: var(--ink);
   outline: none;
   cursor: pointer;
 }
+.filter-select:focus { border-color: var(--brass); }
 .search-pill {
   display: flex;
   align-items: center;
@@ -1410,12 +1428,15 @@ p { color: rgba(34, 26, 18, 0.72); }
   padding: 0 1.1rem;
   background: var(--paper);
 }
+.search-pill:focus-within { border-color: var(--brass); }
 .search-pill input {
   border: none;
   outline: none;
   background: transparent;
-  padding: 0.6rem 0;
+  height: 100%;
+  padding: 0;
   font-size: 0.86rem;
+  line-height: 1;
   min-width: 150px;
   color: var(--ink);
 }
@@ -1790,6 +1811,11 @@ p { color: rgba(34, 26, 18, 0.72); }
   .cp-lighting { grid-column: span 2; aspect-ratio: 16 / 10; }
   /* Reviews: shrink the giant decorative quote mark */
   .reviews-section::before { font-size: 16rem; right: 1rem; }
+  /* Filter bar: search grows, sort select shares the same full-width row */
+  .filter-bar > .d-flex { width: 100%; }
+  .filter-bar .search-pill { flex: 1 1 auto; min-width: 0; }
+  .filter-bar .search-pill input { min-width: 0; width: 100%; }
+  .filter-bar .filter-select { flex-shrink: 0; }
 }
 
 /* Mobile (≤ 575px) — single column, compact nav, stacked actions */
@@ -1828,11 +1854,7 @@ p { color: rgba(34, 26, 18, 0.72); }
   .pdp-wish-btn { order: 2; }
   .pdp-add-btn { order: 3; flex: 1 1 100%; min-width: 0; }
 
-  /* --- Filter bar: search grows, select shrinks — they share one row --- */
-  .filter-bar > .d-flex { width: 100%; }
-  .filter-bar .search-pill { flex: 1 1 auto; min-width: 0; }
-  .filter-bar .search-pill input { min-width: 0; width: 100%; }
-  .filter-bar .filter-select { flex-shrink: 0; }
+
 
   /* --- Newsletter form: stack vertically --- */
   .newsletter-form { flex-direction: column; border-radius: var(--radius-md); padding: 0.8rem; }
